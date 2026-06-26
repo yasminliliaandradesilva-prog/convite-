@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Convite Chá Revelação</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background-color: #f5f0e6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .envelope {
+      width: 300px;
+      height: 200px;
+      background: #c2a070;
+      position: relative;
+      cursor: pointer;
+      border-radius: 8px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: transform 1s ease;
+    }
+
+    .envelope.open {
+      transform: rotateX(180deg);
+    }
+
+    .card {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100%);
+      width: 320px;
+      background: #fffbea;
+      border: 2px solid #c2a070;
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      opacity: 0;
+      transition: opacity 1s ease, transform 1s ease;
+    }
+
+    .envelope.open + .card {
+      opacity: 1;
+      transform: translateX(-50%) translateY(20px);
+    }
+
+    .card h1 {
+      font-size: 1.4em;
+      color: #5a4a3f;
+    }
+
+    .card p {
+      font-size: 1em;
+      color: #4a4a4a;
+    }
+
+    .bear {
+      width: 120px;
+      margin: 10px auto;
+    }
+
+    .leaves {
+      width: 80px;
+      margin: 5px;
+    }
+
+    .buttons {
+      margin-top: 15px;
+    }
+
+    .buttons a {
+      display: inline-block;
+      margin: 5px;
+      padding: 10px 15px;
+      background: #c2a070;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .buttons a:hover {
+      background: #a07f55;
+    }
+
+    .countdown {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #5a4a3f;
+    }
+  </style>
+</head>
+<body>
+  <div class="envelope" onclick="openEnvelope()"></div>
+
+  <div class="card">
+    <h1>Pablo & Yasmin</h1>
+    <p>Com muito amor, convidamos você para compartilhar esse momento tão especial conosco.</p>
+    <img src="https://i.ibb.co/4YgkFhM/bear-safari.png" alt="Ursinho Safari" class="bear">
+    <div>
+      <img src="https://i.ibb.co/4m1Yf4H/olive-leaf.png" alt="Folha" class="leaves">
+      <img src="https://i.ibb.co/4m1Yf4H/olive-leaf.png" alt="Folha" class="leaves">
+    </div>
+    <p><strong>12 de julho de 2026</strong> às <strong>16:15</strong></p>
+    <p>Local: Ilha de Santana</p>
+    <p>Será Maria Isabelly ou Heitor Henrique?</p>
+    <div class="buttons">
+      <a href="https://maps.app.goo.gl/S9TMTaA8RWpDZseu6" target="_blank">Como chegar</a>
+      <a href="https://wa.me/558496066332" target="_blank">Confirmar presença</a>
+    </div>
+    <div class="countdown" id="countdown"></div>
+  </div>
+
+  <script>
+    function openEnvelope() {
+      document.querySelector('.envelope').classList.add('open');
+    }
+
+    function countdown() {
+      const eventDate = new Date("July 12, 2026 16:15:00").getTime();
+      const now = new Date().getTime();
+      const distance = eventDate - now;
+
+      if (distance < 0) {
+        document.getElementById("countdown").innerHTML = "O grande dia chegou!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        days + "d " + hours + "h " + minutes + "m " + seconds + "s ";
+    }
+
+    setInterval(countdown, 1000);
+  </script>
+</body>
+</html>
